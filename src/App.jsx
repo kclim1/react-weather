@@ -1,8 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState , useEffect} from 'react'
-import './App.css'
-import WeatherCard from './components/WeatherCard'
-import fetchCurrentWeather from './services/fetchAPI'
+import './styles/App.css'
+import './styles/index.css'
+import './styles/searchbar.css'
+import './styles/currentcard.css'
+import {CurrentWeatherCard} from './components/CurrentWeatherCard'
+import {fetchCurrentWeather} from './services/fetchCurrentWeather'
+// eslint-disable-next-line no-unused-vars
+import { fetchForecastWeather } from './services/fetchForecastWeather'
 import SearchBar from './components/SearchBar'
 
 const App = ()=>{
@@ -21,19 +26,19 @@ const App = ()=>{
         }
     }
 
-    useEffect(()=>{
-        if(!import.meta.env.API_KEY){
-            console.error('API key missing')
-            setError('api key missing')
-        }
-    },[])
+    useEffect(() => {
+        if (!import.meta.env.VITE_OPENWEATHER_KEY) {
+            console.error('API key missing');
+            setError('API key missing');
+        } 
+    }, []);
     
     return(
         <div className="weather-app">
             <h2>Weather App & 5 Day Forecast</h2>
             <SearchBar onSearch={handleSearch}/>  
             {error && <p>{error}</p>}
-            {weatherData && <WeatherCard weatherData={weatherData} />}
+            {weatherData && <CurrentWeatherCard weatherData={weatherData} />}
                    
         </div>
     )
