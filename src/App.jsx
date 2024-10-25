@@ -6,8 +6,8 @@ import "./styles/searchbar.css";
 import "./styles/currentcard.css";
 import "./styles/forecastcard.css";
 import { CurrentWeatherCard } from "./components/CurrentWeatherCard";
-import { fetchCurrentWeather } from "./services/fetchCurrentWeather";
-import { fetchForecastWeather } from "./services/fetchForecastWeather";
+import { fetchCurrentWeather } from "./fetch-logic/fetchCurrentWeather";
+import { fetchForecastWeather } from "./fetch-logic/fetchForecastWeather";
 import SearchBar from "./components/SearchBar";
 import { ForecastCard } from "./components/ForecastWeatherCard";
 // import {UnitButton} from './components/UnitButton'
