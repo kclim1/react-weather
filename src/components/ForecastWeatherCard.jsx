@@ -21,7 +21,7 @@ export const ForecastCard = ({forecastData,unit})=>{
     }
     const {list} = forecastData
     const tempUnit = unit === "metric" ? "°C" : "°F";
-    const speedUnit = unit === "metric" ? "m/s" : "mph";
+    
 
     const weatherIcon = (condition,size=100)=>{
         switch (condition) {
@@ -60,7 +60,7 @@ export const ForecastCard = ({forecastData,unit})=>{
                 </div>
                 <p>Condition: {item.weather[0].main}</p>
                 <p>Temperature: {item.main.temp}{tempUnit}</p>
-                <p>Humidity: {item.main.humidity}{speedUnit}</p>
+                <p>Humidity: {item.main.humidity}%</p>
               </div>
             );
           })}
