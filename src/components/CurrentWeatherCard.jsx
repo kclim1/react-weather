@@ -8,7 +8,6 @@ import {
   WiRain,
   WiThunderstorm,
   WiSnow,
-  WiNightClear,
   WiFog,
   WiHurricane,
 } from "react-icons/wi";
