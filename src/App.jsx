@@ -40,7 +40,7 @@ const App = ()=>{
     return(
         <div className="weather-app">
             <div className="currentWeather">
-                <h2>Weather App & 5 Day Forecast</h2>
+                <h2>Current Weather & 5 Day Forecast</h2>
                 <SearchBar onSearch={handleSearch}/>  
                 {error && <p>{error}</p>}
                 {weatherData && <CurrentWeatherCard weatherData={weatherData} />}
