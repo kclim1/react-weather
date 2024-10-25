@@ -11,6 +11,6 @@
 
 .card-container:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 255, 0.5);
     cursor: pointer;
 }
