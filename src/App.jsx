@@ -39,8 +39,8 @@ const App = () => {
       setWeatherData(currentData);
       setError(null);
     } catch (error) {
-      setError("problem encountered while fetching weather data");
-      console.error(error, "problem at handleSearch");
+      setError(error.message);
+      console.error(error.message);
     }
   };
 
