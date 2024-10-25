@@ -24,7 +24,7 @@
 }
 
 .forecast-item {
-    border-left: 1px solid #4e73df;
+    border: 1px solid #4e73df;
     padding: 15px;
     background-color: #fff; 
     border-radius: 10px; 
