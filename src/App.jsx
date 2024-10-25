@@ -6,11 +6,12 @@ import "./styles/searchbar.css";
 import "./styles/currentcard.css";
 import "./styles/forecastcard.css";
 import { CurrentWeatherCard } from "./components/CurrentWeatherCard";
-import { fetchCurrentWeather } from "./fetch-logic/fetchCurrentWeather";
-import { fetchForecastWeather } from "./fetch-logic/fetchForecastWeather";
+import { fetchCurrentWeather } from "./services/fetchCurrentWeather";
+import { fetchForecastWeather } from "./services/fetchForecastWeather";
 import SearchBar from "./components/SearchBar";
 import { ForecastCard } from "./components/ForecastWeatherCard";
-// import {UnitButton} from './components/UnitButton'
+import ImperialButton  from "./components/ImperialButton";
+import  MetricButton  from "./components/MetricButton";
 
 const App = () => {
   const [forecastData, setForecastData] = useState(null);
@@ -63,22 +64,10 @@ const App = () => {
         <h2>Weather App & 5 Day Forecast</h2>
         <SearchBar onSearch={handleSearch} />
         <div className="unit-buttons">
-          <button
-            className={`btn me-2 ${
-              unit === "metric" ? "btn-primary active" : "btn-secondary"
-            }`}
-            onClick={selectMetric}
-          >
-            Metric
-          </button>
-          <button
-            className={`btn ${
-              unit === "imperial" ? "btn-primary active" : "btn-secondary"
-            }`}
-            onClick={selectImperial}
-          >
-            Imperial
-          </button>
+          <div className="unit-buttons">
+            <MetricButton unit={unit} selectMetric={selectMetric} />
+            <ImperialButton unit={unit} selectImperial={selectImperial} />
+          </div>
         </div>
         {error && <p>{error}</p>}
         {weatherData && (
