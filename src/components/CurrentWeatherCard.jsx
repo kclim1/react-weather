@@ -12,13 +12,15 @@ import {
   WiHurricane,
 } from "react-icons/wi";
 
-export const CurrentWeatherCard = ({ weatherData }) => {
+export const CurrentWeatherCard = ({ weatherData,unit}) => {
   if (!weatherData) {
     return null;
   }
-  const { cityName, weather, main, wind,dt } = weatherData;
-  const date = new Date(dt * 1000); // Multiply by 1000 to convert from seconds to milliseconds
+  const { name, weather, main, wind,dt } = weatherData;
+  const date = new Date(dt * 1000); 
   const formattedDate = date.toLocaleString()
+  const tempUnit = unit === "metric" ? "°C" : "°F";
+  const speedUnit = unit === "metric" ? "m/s" : "mph";
 
   const getWeatherIcon = (condition , size=100) => {
     switch (condition) {
@@ -43,20 +45,20 @@ export const CurrentWeatherCard = ({ weatherData }) => {
 
   return (
     <div className="card-container">
-      <h1>{cityName}</h1>
+      <h1>{name}</h1>
       <div className="weatherIcon" >{getWeatherIcon(weather[0].main)}</div>
       <p><strong>Date & Time:</strong> {formattedDate}</p>
       <p>
-        <strong>Temperature:</strong> {main.temp}°C
+        <strong>Temperature:</strong> {main.temp}{tempUnit}
       </p>
       <p>
-        <strong>Feels Like:</strong> {main.feels_like}°C
+        <strong>Feels Like:</strong> {main.feels_like}{tempUnit}
       </p>
       <p>
         <strong>Humidity:</strong> {main.humidity}%
       </p>
       <p>
-        <strong>Wind Speed:</strong> {wind.speed} m/s
+        <strong>Wind Speed:</strong> {wind.speed}{speedUnit}
       </p>
       <p>
         <strong>Condition:</strong>{" "}

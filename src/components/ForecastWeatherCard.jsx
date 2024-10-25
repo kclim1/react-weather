@@ -14,11 +14,14 @@ import {
   
 
   
-export const ForecastCard = ({forecastData})=>{
+// eslint-disable-next-line react/prop-types
+export const ForecastCard = ({forecastData,unit})=>{
     if(!forecastData){
         return null
     }
     const {list} = forecastData
+    const tempUnit = unit === "metric" ? "°C" : "°F";
+    const speedUnit = unit === "metric" ? "m/s" : "mph";
 
     const weatherIcon = (condition,size=100)=>{
         switch (condition) {
@@ -56,8 +59,8 @@ export const ForecastCard = ({forecastData})=>{
                   {weatherIcon(item.weather[0].main)}
                 </div>
                 <p>Condition: {item.weather[0].main}</p>
-                <p>Temperature: {item.main.temp}°C</p>
-                <p>Humidity: {item.main.humidity}%</p>
+                <p>Temperature: {item.main.temp}{tempUnit}</p>
+                <p>Humidity: {item.main.humidity}{speedUnit}</p>
               </div>
             );
           })}

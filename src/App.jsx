@@ -10,16 +10,32 @@ import {fetchCurrentWeather} from './services/fetchCurrentWeather'
 import { fetchForecastWeather } from './services/fetchForecastWeather'
 import SearchBar from './components/SearchBar'
 import {ForecastCard} from './components/ForecastWeatherCard'
+// import {UnitButton} from './components/UnitButton'
 
 const App = ()=>{
     const [forecastData,setForecastData] = useState(null)
     const [weatherData , setWeatherData] = useState(null)
     const [error,setError] = useState(null)
+    const [unit, setUnit] = useState('metric')
+    const [city,setCity] = useState('')
     
+
+    const selectMetric = () => {
+        setUnit('metric');
+        console.log('metric selected')
+      };
+      
+      const selectImperial = () => {
+        setUnit('imperial');
+        console.log('imperial selected')
+
+      };
+      
     const handleSearch = async (city)=>{
         try{
-            const currentData = await fetchCurrentWeather(city)
-            const forecastData = await fetchForecastWeather(city)
+            setCity(city)
+            const currentData = await fetchCurrentWeather(city,unit)
+            const forecastData = await fetchForecastWeather(city,unit)
             setForecastData(forecastData)
             setWeatherData(currentData)
             setError(null)
@@ -28,7 +44,8 @@ const App = ()=>{
             console.error(error,'problem at handleSearch') 
         }
     }
-   
+  
+
 
     useEffect(() => {
         if (!import.meta.env.VITE_OPENWEATHER_KEY) {
@@ -36,22 +53,43 @@ const App = ()=>{
             setError('API key missing');
         } 
     }, []);
+
+    useEffect(() => {
+        if (city) {
+          handleSearch(city);
+        }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [unit]);
     
-    return(
+    return (
         <div className="weather-app">
             <div className="currentWeather">
-                <h2>Current Weather & 5 Day Forecast</h2>
-                <SearchBar onSearch={handleSearch}/>  
-                {error && <p>{error}</p>}
-                {weatherData && <CurrentWeatherCard weatherData={weatherData} />}
-            </div>
-            <div className="forecastWeather">
-                {forecastData && <h3>Weather Forecast:</h3>}
-                {forecastData && <ForecastCard forecastData={forecastData} />}
-            </div>
+            <h2>Weather App & 5 Day Forecast</h2>
+            <SearchBar onSearch={handleSearch} />
+            <div className="unit-buttons">
+  <button
+    className={`btn ${unit === 'metric' ? 'btn-primary active' : 'btn-secondary'}`}
+    onClick={selectMetric}
+  >
+    Metric
+  </button>
+  <button
+    className={`btn ${unit === 'imperial' ? 'btn-primary active' : 'btn-secondary'}`}
+    onClick={selectImperial}
+  >
+    Imperial
+  </button>
+</div>
+            {error && <p>{error}</p>}
+            {weatherData && <CurrentWeatherCard weatherData={weatherData} unit={unit} />}
+          </div>
+    
+          <div className="forecastWeather">
+            {forecastData && <ForecastCard forecastData={forecastData} unit={unit}/>}
+          </div>
         </div>
-    )
-}
-
+      );
+    };
+    
 
 export default App
