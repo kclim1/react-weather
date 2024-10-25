@@ -46,12 +46,12 @@ export const ForecastCard = ({forecastData})=>{
     return (
         <div className="forecast-container">
           {filteredList.map((item, index) => {
-            const [date, time] = item.dt_txt.split(' ');
+            const [date] = item.dt_txt.split(' ');
       
             return (
               <div key={index} className="forecast-item">
                 <h3> {date}</h3>
-                <h4> {time}</h4>
+                
                 <div className="weather-icon">
                   {weatherIcon(item.weather[0].main)}
                 </div>
