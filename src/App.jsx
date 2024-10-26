@@ -64,10 +64,10 @@ const App = () => {
         <h2>Weather App & 5 Day Forecast</h2>
         <SearchBar onSearch={handleSearch} />
         <div className="unit-buttons">
-          <div className="unit-buttons">
+          
             <MetricButton unit={unit} selectMetric={selectMetric} />
             <ImperialButton unit={unit} selectImperial={selectImperial} />
-          </div>
+         
         </div>
         {error && <p>{error}</p>}
         {weatherData && (
